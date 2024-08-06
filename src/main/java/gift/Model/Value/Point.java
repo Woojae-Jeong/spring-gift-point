@@ -27,6 +27,8 @@ public class Point {
     }
 
     public void subtract(int value) {
+        if(value < 0 )
+            throw new IllegalArgumentException("빼려는 값이 음수일 수는 없습니다. 절대값을 입력해주세요");
         if(this.value - value < 0)
             throw new IllegalArgumentException("포인트는 0원 이하일 수는 없습니다. 빼려는 포인트를 조절해 주세요");
 
@@ -34,6 +36,8 @@ public class Point {
     }
 
     public void add(int value) {
+        if(value < 0)
+            throw new IllegalArgumentException("더하려는 값이 음수일 수는 없습니다. 절대값을 입력해주세요");
         this.value += value;
     }
 

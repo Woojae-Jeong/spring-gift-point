@@ -2,7 +2,6 @@ package gift.Controller;
 
 import gift.DTO.RequestOrderDTO;
 import gift.DTO.ResponseOrderDTO;
-import gift.DTO.ResponseProductDTO;
 import gift.Model.Entity.Member;
 import gift.Service.OrderService;
 import gift.annotation.ValidUser;
@@ -13,7 +12,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
