@@ -1,7 +1,15 @@
 package gift.exception;
 
 public class BusinessException extends RuntimeException{
-    public BusinessException(String message){
-        super(message);
+
+    private final ErrorType errorType;
+
+    public BusinessException(ErrorType errorType){
+        super(errorType.getMessage());
+        this.errorType = errorType;
+    }
+
+    public ErrorType getErrorType (){
+        return errorType;
     }
 }
