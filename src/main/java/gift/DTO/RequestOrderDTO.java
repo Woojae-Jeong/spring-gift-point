@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+import java.util.Optional;
+
 @Schema(description = "주문 요청 DTO")
 public record RequestOrderDTO (
     @NotNull(message = "옵션을 선택하지 않으셨습니다. 선택해주세요")
@@ -25,5 +27,5 @@ public record RequestOrderDTO (
             message = "현금 영수증 휴대폰 번호의 양식이 잘못되었습니다"
     )
     @Schema(description= "현금 영수증 신청 휴대폰 번호")
-    String phoneNumber
+    Optional<String> phoneNumber
 ) { }
