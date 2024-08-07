@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 @Schema(description = "로그인/회원가입 요청 DTO")
-public record RequestMemberDTO(
+public record RequestMemberDto(
         @NotBlank
         @Pattern(
                 regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",

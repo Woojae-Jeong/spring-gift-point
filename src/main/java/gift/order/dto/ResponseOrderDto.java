@@ -5,7 +5,7 @@ import gift.vo.CashReceipt;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "주문 응답 DTO")
-public class ResponseOrderDTO {
+public class ResponseOrderDto {
     @Schema(description = "주문 Id")
     private Long id;
 
@@ -24,7 +24,7 @@ public class ResponseOrderDTO {
     @Schema(description = "주문 메세지")
     private String phoneNumber;
 
-    public ResponseOrderDTO(Long id, Long optionId, Integer quantity, String orderDateTime, String message, String phoneNumber) {
+    public ResponseOrderDto(Long id, Long optionId, Integer quantity, String orderDateTime, String message, String phoneNumber) {
         this.id = id;
         this.optionId = optionId;
         this.quantity = quantity;
@@ -57,8 +57,8 @@ public class ResponseOrderDTO {
         return phoneNumber;
     }
 
-    public static ResponseOrderDTO of(Order order){
-        return new ResponseOrderDTO(
+    public static ResponseOrderDto of(Order order){
+        return new ResponseOrderDto(
                 order.getId(),
                 order.getOption().getId(),
                 order.getQuantity().getValue(),

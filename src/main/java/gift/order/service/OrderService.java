@@ -3,8 +3,8 @@ package gift.order.service;
 import gift.member.entity.Member;
 import gift.option.entity.Option;
 import gift.option.service.OptionService;
-import gift.order.dto.RequestOrderDTO;
-import gift.order.dto.ResponseOrderDTO;
+import gift.order.dto.RequestOrderDto;
+import gift.order.dto.ResponseOrderDto;
 import gift.kakaoOauth.Event.EventObject.SendMessageToMeEvent;
 import gift.option.exception.OptionNotFoundException;
 import gift.order.entity.Order;
@@ -49,7 +49,7 @@ public class OrderService {
     }
 
     @Transactional
-    public ResponseOrderDTO createOrder(Member member, RequestOrderDTO requestOrderDTO) {
+    public ResponseOrderDto createOrder(Member member, RequestOrderDto requestOrderDTO) {
         Option option = optionRepository.findById(requestOrderDTO.optionId()).orElseThrow(()->
                 new OptionNotFoundException("매칭되는 옵션이 없습니다"));
 
@@ -77,7 +77,7 @@ public class OrderService {
             eventPublisher.publishEvent(new SendMessageToMeEvent(accessToken.get(), requestOrderDTO.message()));
         }
 
-        return ResponseOrderDTO.of(order);
+        return ResponseOrderDto.of(order);
     }
 
     private int getToalPrice(int quantity, Product product) {
@@ -89,10 +89,10 @@ public class OrderService {
     }
 
     @Transactional(readOnly = true)
-    public List<ResponseOrderDTO> getOrders(Member member){
+    public List<ResponseOrderDto> getOrders(Member member){
        return orderRepository.findAllByMember(member)
                .stream()
-               .map(ResponseOrderDTO::of)
+               .map(ResponseOrderDto::of)
                .toList();
     }
 

@@ -1,12 +1,12 @@
 package gift.admin.controller;
 
 import gift.member.entity.Member;
-import gift.admin.dto.RequestAddPointDTO;
+import gift.admin.dto.RequestAddPointDto;
 import gift.member.service.MemberService;
 import gift.option.service.OptionService;
 import gift.product.service.ProductService;
-import gift.product.dto.RequestProductDTO;
-import gift.product.dto.RequestProductPostDTO;
+import gift.product.dto.RequestProductDto;
+import gift.product.dto.RequestProductPostDto;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,13 +52,13 @@ public class AdminController {
     @GetMapping("/members/charge/{id}")
     public String chargePointForm(@PathVariable("id") Long id, Model model) {
         Member member = memberService.selectMember(id);
-        model.addAttribute("requestAddPointDTO", new RequestAddPointDTO(0));
+        model.addAttribute("requestAddPointDTO", new RequestAddPointDto(0));
         model.addAttribute("id", id);
         return "charge-member-points";
     }
 
     @PutMapping("/members/charge/{id}")
-    public String chargePoint(@PathVariable("id") Long id, @Valid @ModelAttribute RequestAddPointDTO requestAddPointDTO) {
+    public String chargePoint(@PathVariable("id") Long id, @Valid @ModelAttribute RequestAddPointDto requestAddPointDTO) {
         memberService.addPoints(id, requestAddPointDTO.chargePoint());
         return "redirect:/admin/members";
     }
@@ -89,12 +89,12 @@ public class AdminController {
 
     @GetMapping("/products/new")
     public String newProductForm(Model model) {
-        model.addAttribute("product", new RequestProductPostDTO("이름을 입력해주세요", 1, "url을 입력해주세요", 1L, "옵션 이름을 입력해주세요", 1));
+        model.addAttribute("product", new RequestProductPostDto("이름을 입력해주세요", 1, "url을 입력해주세요", 1L, "옵션 이름을 입력해주세요", 1));
         return "new-product";
     }
 
     @PostMapping("/products")
-    public String newProduct(@Valid @ModelAttribute RequestProductPostDTO requestProductPostDTO) {
+    public String newProduct(@Valid @ModelAttribute RequestProductPostDto requestProductPostDTO) {
         productService.addProduct(requestProductPostDTO);
         return "redirect:/admin/products";
     }
@@ -102,13 +102,13 @@ public class AdminController {
     @GetMapping("/products/edit/{id}")
     public String editProductForm(@PathVariable("id") Long id, Model model) {
         Product product = productService.selectProduct(id);
-        model.addAttribute("product", RequestProductDTO.of(product));
+        model.addAttribute("product", RequestProductDto.of(product));
         model.addAttribute("id", id);
         return "edit-product";
     }
 
     @PutMapping("/products/edit/{id}")
-    public String updateProduct(@PathVariable("id") Long id, @Valid @ModelAttribute RequestProductDTO requestProductDTO) {
+    public String updateProduct(@PathVariable("id") Long id, @Valid @ModelAttribute RequestProductDto requestProductDTO) {
         productService.editProduct(id, requestProductDTO);
         return "redirect:/admin/products";
     }

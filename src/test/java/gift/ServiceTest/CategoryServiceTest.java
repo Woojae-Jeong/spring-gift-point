@@ -1,7 +1,7 @@
 package gift.ServiceTest;
 
-import gift.category.dto.RequestCategoryDTO;
-import gift.category.dto.ResponseCategoryDTO;
+import gift.category.dto.RequestCategoryDto;
+import gift.category.dto.ResponseCategoryDto;
 import gift.category.exception.CategoryNotFoundException;
 import gift.category.repository.CategoryRepository;
 import gift.category.service.CategoryService;
@@ -22,14 +22,14 @@ public class CategoryServiceTest {
 
     @Test
     void addCategoryTest(){
-        RequestCategoryDTO requestCategoryDTO = new RequestCategoryDTO("카테고리1", "#123456", "카테고리 imageUrl", "카테고리 설명");
+        RequestCategoryDto requestCategoryDTO = new RequestCategoryDto("카테고리1", "#123456", "카테고리 imageUrl", "카테고리 설명");
         assertThatNoException().
                 isThrownBy(()-> categoryService.addCategory(requestCategoryDTO));
     }
 
     @Test
     void getCategoriesTest() {
-        List<ResponseCategoryDTO> categories = categoryService.getCategories();
+        List<ResponseCategoryDto> categories = categoryService.getCategories();
         assertAll(
                 ()-> assertThat(categories).hasSize(1),
                 ()-> assertThat(categories.get(0).getName()).isEqualTo("카테고리 test")
@@ -38,7 +38,7 @@ public class CategoryServiceTest {
 
     @Test
     void editCategoryTest() {
-        RequestCategoryDTO requestCategoryDTO = new RequestCategoryDTO("없는 카테고리", "#123456", "카테고리 imageUrl", "카테고리 설명");
+        RequestCategoryDto requestCategoryDTO = new RequestCategoryDto("없는 카테고리", "#123456", "카테고리 imageUrl", "카테고리 설명");
         assertThatExceptionOfType(CategoryNotFoundException.class)
                 .isThrownBy(()-> categoryService.editCategory(requestCategoryDTO));
     }

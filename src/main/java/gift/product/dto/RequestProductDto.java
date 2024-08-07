@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 
 @Schema(description = "상품 요청 DTO")
-public record RequestProductDTO(
+public record RequestProductDto(
         @Pattern(
                 regexp = "^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣 ()\\[\\]+\\-\\&/_]*$",
                 message = "상품 이름에는 허용된 특수 문자만 포함될 수 있습니다: (), [], +, -, &, /, _"
@@ -28,8 +28,8 @@ public record RequestProductDTO(
         @Schema(description = "카테고리 Id")
         Long categoryId
 ) {
-        public static RequestProductDTO of(Product product){
-                return new RequestProductDTO(product.getName().getValue(), product.getPrice().getValue(), product.getImageUrl().getValue(), product.getCategory().getId());
+        public static RequestProductDto of(Product product){
+                return new RequestProductDto(product.getName().getValue(), product.getPrice().getValue(), product.getImageUrl().getValue(), product.getCategory().getId());
         }
 }
 

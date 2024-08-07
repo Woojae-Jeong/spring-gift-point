@@ -4,7 +4,7 @@ import gift.product.entity.Product;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "카테고리에 속하는 상품 목록 조회 응답 DTO")
-public record ResponseProductListOfCategoryDTO(
+public record ResponseProductListOfCategoryDto(
         @Schema(description = "상품 id")
         Long id,
 
@@ -17,8 +17,8 @@ public record ResponseProductListOfCategoryDTO(
         @Schema(description = "상품 이미지url")
         String imageUrl
 ){
-    public static ResponseProductListOfCategoryDTO of (Product product){
-        return new ResponseProductListOfCategoryDTO(product.getId()
+    public static ResponseProductListOfCategoryDto of (Product product){
+        return new ResponseProductListOfCategoryDto(product.getId()
                 , product.getName().getValue()
                 , product.getPrice().getValue()
                 , product.getImageUrl().getValue()

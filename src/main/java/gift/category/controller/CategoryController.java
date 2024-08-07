@@ -1,10 +1,10 @@
 package gift.category.controller;
 
 
-import gift.category.dto.ResponseCategoryListDTO;
+import gift.category.dto.ResponseCategoryListDto;
 import gift.category.entity.Category;
-import gift.category.dto.RequestCategoryDTO;
-import gift.category.dto.ResponseCategoryDTO;
+import gift.category.dto.RequestCategoryDto;
+import gift.category.dto.ResponseCategoryDto;
 import gift.category.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -40,7 +40,7 @@ public class CategoryController {
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @PostMapping
-    public ResponseEntity<String> addCategory(@Valid @RequestBody RequestCategoryDTO requestCategoryDTO){
+    public ResponseEntity<String> addCategory(@Valid @RequestBody RequestCategoryDto requestCategoryDTO){
         Category category = categoryService.addCategory(requestCategoryDTO);
         return ResponseEntity.created(URI.create("api/categories/"+ category.getId())).body("카테고리가 정상적으로 추가되었습니다");
     }
@@ -48,15 +48,15 @@ public class CategoryController {
 
     @Operation(summary = "카테고리 목록 조회", description = "등록된 카테고리를 조회합니다")
     @ApiResponse(responseCode = "200", description = "조회 완료",
-            content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ResponseCategoryDTO.class)))
+            content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ResponseCategoryDto.class)))
     })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @GetMapping
-    public ResponseEntity<ResponseCategoryListDTO> getCategories (){
-        List<ResponseCategoryDTO> categoryList = categoryService.getCategories();
-        return ResponseEntity.ok(new ResponseCategoryListDTO(categoryList));
+    public ResponseEntity<ResponseCategoryListDto> getCategories (){
+        List<ResponseCategoryDto> categoryList = categoryService.getCategories();
+        return ResponseEntity.ok(new ResponseCategoryListDto(categoryList));
     }
 
     @Operation(summary = "카테고리 수정", description = "카테고리를 수정합니다")
@@ -70,7 +70,7 @@ public class CategoryController {
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @PutMapping
-    public ResponseEntity <String> editCategory(@PathVariable("category-id") Long categoryId, @Valid @RequestBody RequestCategoryDTO requestCategoryDTO){
+    public ResponseEntity <String> editCategory(@PathVariable("category-id") Long categoryId, @Valid @RequestBody RequestCategoryDto requestCategoryDTO){
         categoryService.editCategory(requestCategoryDTO);
         return ResponseEntity.ok("카테고리를 정상적으로 수정하였습니다");
     }

@@ -4,7 +4,7 @@ import gift.option.entity.Option;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "옵션 응답 DTO")
-public class ResponseOptionDTO {
+public class ResponseOptionDto {
     @Schema(description = "옵션 Id")
     private Long id;
 
@@ -14,7 +14,7 @@ public class ResponseOptionDTO {
     @Schema(description = "옵션 갯수")
     private int quantity;
 
-    public ResponseOptionDTO(Long id, String name, int quantity) {
+    public ResponseOptionDto(Long id, String name, int quantity) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
@@ -32,7 +32,7 @@ public class ResponseOptionDTO {
         return quantity;
     }
 
-    public static ResponseOptionDTO of(Option option) {
-        return new ResponseOptionDTO(option.getId(), option.getName().getValue(), option.getQuantity().getValue());
+    public static ResponseOptionDto of(Option option) {
+        return new ResponseOptionDto(option.getId(), option.getName().getValue(), option.getQuantity().getValue());
     }
 }

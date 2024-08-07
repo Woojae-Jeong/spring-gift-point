@@ -1,7 +1,7 @@
 package gift.member.controller;
 
-import gift.member.dto.RequestMemberDTO;
-import gift.member.dto.ResponseMemberDTO;
+import gift.member.dto.RequestMemberDto;
+import gift.member.dto.ResponseMemberDto;
 import gift.member.entity.Member;
 import gift.member.service.MemberService;
 import gift.annotation.ValidUser;
@@ -40,9 +40,9 @@ public class MemberController {
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @PostMapping("/register")
-    public ResponseEntity<ResponseMemberDTO> registerUser(@Valid @RequestBody RequestMemberDTO requestMemberDTO){
+    public ResponseEntity<ResponseMemberDto> registerUser(@Valid @RequestBody RequestMemberDto requestMemberDTO){
         String token = memberService.signUpUser(requestMemberDTO);
-        return new ResponseEntity<>(new ResponseMemberDTO(token), HttpStatus.CREATED);
+        return new ResponseEntity<>(new ResponseMemberDto(token), HttpStatus.CREATED);
     }
 
     @Operation(summary = "로그인", description = "존재하는 사용자인지 확인 후 토큰을 발급합니다" )
@@ -59,9 +59,9 @@ public class MemberController {
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @PostMapping("/login")
-    public ResponseEntity<ResponseMemberDTO> loginUser(@Valid @RequestBody RequestMemberDTO member) {
+    public ResponseEntity<ResponseMemberDto> loginUser(@Valid @RequestBody RequestMemberDto member) {
         String token = memberService.loginUser(member);
-        return ResponseEntity.ok(new ResponseMemberDTO(token));
+        return ResponseEntity.ok(new ResponseMemberDto(token));
     }
 
     @Operation(summary = "포인트 조회", description = "사용자의 포인트를 조회합니다")

@@ -2,8 +2,8 @@ package gift.category.service;
 
 import gift.category.exception.CategoryNotFoundException;
 import gift.category.entity.Category;
-import gift.category.dto.RequestCategoryDTO;
-import gift.category.dto.ResponseCategoryDTO;
+import gift.category.dto.RequestCategoryDto;
+import gift.category.dto.ResponseCategoryDto;
 import gift.vo.Name;
 import gift.category.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
@@ -21,15 +21,15 @@ public class CategoryService {
     }
 
     @Transactional
-    public Category addCategory(RequestCategoryDTO requestCategoryDTO) {
+    public Category addCategory(RequestCategoryDto requestCategoryDTO) {
         Category category = new Category(requestCategoryDTO.name(), requestCategoryDTO.color(), requestCategoryDTO.imageUrl(), requestCategoryDTO.description());
         return categoryRepository.save(category);
     }
     @Transactional(readOnly = true)
-    public List<ResponseCategoryDTO> getCategories() {
+    public List<ResponseCategoryDto> getCategories() {
         return categoryRepository.findAll()
                 .stream()
-                .map(it->new ResponseCategoryDTO(
+                .map(it->new ResponseCategoryDto(
                         it.getId(),
                         it.getName().getValue(),
                         it.getColor().getValue(),
@@ -39,7 +39,7 @@ public class CategoryService {
     }
 
     @Transactional
-    public void editCategory(RequestCategoryDTO requestCategoryDTO) {
+    public void editCategory(RequestCategoryDto requestCategoryDTO) {
         Category category = categoryRepository.findByName(new Name(requestCategoryDTO.name()))
                 .orElseThrow(()-> new CategoryNotFoundException("매칭되는 카테고리가 없습니다"));
         category.update(requestCategoryDTO.name(), requestCategoryDTO.color(), requestCategoryDTO.imageUrl(), requestCategoryDTO.description());;

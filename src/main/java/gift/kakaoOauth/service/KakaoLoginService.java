@@ -1,7 +1,7 @@
 package gift.kakaoOauth.service;
 
 import gift.kakaoOauth.dto.ResponseKaKaoUserInfo;
-import gift.kakaoOauth.dto.ResponseKakaoTokenDTO;
+import gift.kakaoOauth.dto.ResponseKakaoTokenDto;
 import gift.kakaoOauth.exception.KaKaoBadRequestException;
 import gift.kakaoOauth.exception.KaKaoServerErrorException;
 import gift.member.entity.Member;
@@ -97,7 +97,7 @@ public class KakaoLoginService {
                 .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
                     throw new KaKaoServerErrorException("카카오 토큰 가져오기 API : " + response.getStatusCode() + "에러 발생. ");
                 })
-                .toEntity(ResponseKakaoTokenDTO.class)
+                .toEntity(ResponseKakaoTokenDto.class)
                 .getBody()
                 .getAccessToken();
         return accessToken;

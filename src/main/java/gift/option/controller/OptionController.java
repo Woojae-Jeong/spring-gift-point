@@ -1,8 +1,8 @@
 package gift.option.controller;
 
 import gift.option.entity.Option;
-import gift.option.dto.RequestOptionDTO;
-import gift.option.dto.ResponseOptionDTO;
+import gift.option.dto.RequestOptionDto;
+import gift.option.dto.ResponseOptionDto;
 import gift.option.service.OptionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -39,14 +39,14 @@ public class OptionController {
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @PostMapping
-    public ResponseEntity<String> addOption (@PathVariable("product-id") Long productId, @Valid @RequestBody RequestOptionDTO requestOptionDTO){
+    public ResponseEntity<String> addOption (@PathVariable("product-id") Long productId, @Valid @RequestBody RequestOptionDto requestOptionDTO){
         Option option = optionService.addOption(productId, requestOptionDTO);
         return ResponseEntity.created(URI.create("/api/products/"+productId+"/options/"+ option.getId())).body("옵션이 정상적으로 추가되었습니다");
     }
 
     @Operation(summary = "옵션 조회", description = "옵션 목록을 조회합니다")
     @ApiResponse(responseCode = "200", description = "조회 완료",
-            content= {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ResponseOptionDTO.class)))
+            content= {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ResponseOptionDto.class)))
     })
     @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인하거나 상품이 존재하지 않습니다",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
@@ -55,8 +55,8 @@ public class OptionController {
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @GetMapping
-    public ResponseEntity<List<ResponseOptionDTO>> getOptions (@PathVariable("product-id") Long productId){
-        List<ResponseOptionDTO> optionList = optionService.getOptions(productId);
+    public ResponseEntity<List<ResponseOptionDto>> getOptions (@PathVariable("product-id") Long productId){
+        List<ResponseOptionDto> optionList = optionService.getOptions(productId);
         return ResponseEntity.ok(optionList);
     }
 
@@ -71,7 +71,7 @@ public class OptionController {
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @PutMapping("/{option-id}")
-    public ResponseEntity<String> editOption(@PathVariable("product-id") Long productId, @PathVariable("option-id") Long optionId, @Valid @RequestBody RequestOptionDTO requestOptionDTO){
+    public ResponseEntity<String> editOption(@PathVariable("product-id") Long productId, @PathVariable("option-id") Long optionId, @Valid @RequestBody RequestOptionDto requestOptionDTO){
         optionService.editOption(productId, optionId, requestOptionDTO);
         return ResponseEntity.ok("옵션이 정상적으로 수정되었습니다");
     }

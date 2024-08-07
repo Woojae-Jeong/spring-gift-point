@@ -4,8 +4,8 @@ import gift.option.exception.OptionNotFoundException;
 import gift.product.exception.ProductNotFoundException;
 import gift.option.entity.Option;
 import gift.product.entity.Product;
-import gift.option.dto.RequestOptionDTO;
-import gift.option.dto.ResponseOptionDTO;
+import gift.option.dto.RequestOptionDto;
+import gift.option.dto.ResponseOptionDto;
 import gift.option.repository.OptionRepository;
 import gift.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class OptionService {
     }
 
     @Transactional
-    public Option addOption(Long productId, RequestOptionDTO requestOptionDTO){
+    public Option addOption(Long productId, RequestOptionDto requestOptionDTO){
         Product product = productRepository.findById(productId).orElseThrow(()->new ProductNotFoundException("매칭되는 product가 없습니다"));
         optionKeeperService.checkUniqueOptionName(product, requestOptionDTO.name());
         Option option = new Option(requestOptionDTO.name(), requestOptionDTO.quantity(), product);
@@ -34,11 +34,11 @@ public class OptionService {
     }
 
     @Transactional(readOnly = true)
-    public  List<ResponseOptionDTO> getOptions (Long productId){
+    public  List<ResponseOptionDto> getOptions (Long productId){
         Product product = productRepository.findById(productId).orElseThrow(()-> new ProductNotFoundException("매칭되는 product가 없습니다"));
         return optionRepository.findByProduct(product)
                 .stream()
-                .map(it-> new ResponseOptionDTO(
+                .map(it-> new ResponseOptionDto(
                         it.getId(),
                         it.getName().getValue(),
                         it.getQuantity().getValue()))
@@ -46,7 +46,7 @@ public class OptionService {
     }
 
     @Transactional
-    public void editOption(Long productId, Long optionId, RequestOptionDTO requestOptionDTO) {
+    public void editOption(Long productId, Long optionId, RequestOptionDto requestOptionDTO) {
         Option option = optionRepository.findById(optionId).orElseThrow(()-> new OptionNotFoundException("매칭되는 옵션이 없습니다"));
         if (!(option.isBelongToProduct(productId)))
             throw new OptionNotFoundException("해당 옵션은 해당 상품에 속하지 않는 옵션입니다");

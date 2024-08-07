@@ -1,7 +1,7 @@
 package gift.product.service;
 
 import gift.category.exception.CategoryNotFoundException;
-import gift.option.dto.ResponseOptionDTO;
+import gift.option.dto.ResponseOptionDto;
 import gift.product.exception.ProductNotFoundException;
 import gift.category.entity.Category;
 import gift.option.entity.Option;
@@ -9,10 +9,10 @@ import gift.product.entity.Product;
 import gift.category.repository.CategoryRepository;
 import gift.option.repository.OptionRepository;
 import gift.product.repository.ProductRepository;
-import gift.product.dto.RequestProductDTO;
-import gift.product.dto.RequestProductPostDTO;
-import gift.product.dto.ResponseProductDTO;
-import gift.product.dto.ResponseProductListOfCategoryDTO;
+import gift.product.dto.RequestProductDto;
+import gift.product.dto.RequestProductPostDto;
+import gift.product.dto.ResponseProductDto;
+import gift.product.dto.ResponseProductListOfCategoryDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -42,29 +42,29 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ResponseProductListOfCategoryDTO> getAllProducts(Pageable pageable, Long categoryId) {
+    public Page<ResponseProductListOfCategoryDto> getAllProducts(Pageable pageable, Long categoryId) {
         Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException("매칭되는 category가 없습니다"));
         Page<Product> productPage = productRepository.findByCategory(category, pageable);
-        List<ResponseProductListOfCategoryDTO> response = productPage.getContent()
+        List<ResponseProductListOfCategoryDto> response = productPage.getContent()
                 .stream()
-                .map(ResponseProductListOfCategoryDTO:: of)
+                .map(ResponseProductListOfCategoryDto:: of)
                 .toList();
-        Page<ResponseProductListOfCategoryDTO> page = new PageImpl<>(response, pageable, productPage.getTotalElements());
+        Page<ResponseProductListOfCategoryDto> page = new PageImpl<>(response, pageable, productPage.getTotalElements());
         return page;
     }
 
     @Transactional(readOnly = true)
-    public ResponseProductDTO getProduct(Long productId) {
+    public ResponseProductDto getProduct(Long productId) {
         Product product = productRepository.findById(productId).orElseThrow(()-> new ProductNotFoundException("매칭되는 product가 없습니다"));
-        List<ResponseOptionDTO> options = optionRepository.findByProduct(product)
+        List<ResponseOptionDto> options = optionRepository.findByProduct(product)
                 .stream()
-                .map(ResponseOptionDTO :: of)
+                .map(ResponseOptionDto:: of)
                 .toList();
-        return ResponseProductDTO.of(product, options);
+        return ResponseProductDto.of(product, options);
     }
 
     @Transactional
-    public void addProduct(RequestProductPostDTO requestProductPostDTO) {
+    public void addProduct(RequestProductPostDto requestProductPostDTO) {
         Category category = categoryRepository.findById(requestProductPostDTO.categoryId())
                 .orElseThrow(()-> new CategoryNotFoundException("매칭되는 카테고리가 없습니다"));
         Product product = new Product(requestProductPostDTO.name(), requestProductPostDTO.price(), requestProductPostDTO.imageUrl(), category);
@@ -79,7 +79,7 @@ public class ProductService {
     }
 
     @Transactional
-    public void editProduct(long id, RequestProductDTO requestProductDTO) {
+    public void editProduct(long id, RequestProductDto requestProductDTO) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("매칭되는 product가 없습니다"));
         Category category = categoryRepository.findById(requestProductDTO.categoryId())
                 .orElseThrow(() -> new CategoryNotFoundException("매칭되는 카테고리가 없습니다"));

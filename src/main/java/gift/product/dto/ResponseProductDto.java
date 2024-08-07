@@ -1,7 +1,7 @@
 package gift.product.dto;
 
 
-import gift.option.dto.ResponseOptionDTO;
+import gift.option.dto.ResponseOptionDto;
 import gift.product.entity.Product;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Schema(description = "단일 상품 조회 응답 DTO")
-public class ResponseProductDTO {
+public class ResponseProductDto {
     @Schema(description = "상품 Id")
     private Long id;
 
@@ -23,9 +23,9 @@ public class ResponseProductDTO {
     private String imageUrl;
 
     @Schema(description = "상품 옵션")
-    private List<ResponseOptionDTO> options;
+    private List<ResponseOptionDto> options;
 
-    public ResponseProductDTO(Long id, String name, int price, String imageUrl, List<ResponseOptionDTO> options) {
+    public ResponseProductDto(Long id, String name, int price, String imageUrl, List<ResponseOptionDto> options) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -49,11 +49,11 @@ public class ResponseProductDTO {
         return imageUrl;
     }
 
-    public List<ResponseOptionDTO> getOptions() {
+    public List<ResponseOptionDto> getOptions() {
         return options;
     }
 
-    public static ResponseProductDTO of(Product product, List<ResponseOptionDTO> options) {
-        return new ResponseProductDTO(product.getId(), product.getName().getValue(), product.getPrice().getValue(), product.getImageUrl().getValue(), options);
+    public static ResponseProductDto of(Product product, List<ResponseOptionDto> options) {
+        return new ResponseProductDto(product.getId(), product.getName().getValue(), product.getPrice().getValue(), product.getImageUrl().getValue(), options);
     }
 }

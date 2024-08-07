@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import java.util.Optional;
 
 @Schema(description = "주문 요청 DTO")
-public record RequestOrderDTO (
+public record RequestOrderDto(
     @NotNull(message = "옵션을 선택하지 않으셨습니다. 선택해주세요")
     @Min(value = 1, message = "옵션Id 값은 1이상입니다")
     @Schema(description = "옵션 Id")

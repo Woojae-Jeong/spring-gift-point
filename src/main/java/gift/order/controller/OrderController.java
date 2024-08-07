@@ -1,7 +1,7 @@
 package gift.order.controller;
 
-import gift.order.dto.RequestOrderDTO;
-import gift.order.dto.ResponseOrderDTO;
+import gift.order.dto.RequestOrderDto;
+import gift.order.dto.ResponseOrderDto;
 import gift.member.entity.Member;
 import gift.order.service.OrderService;
 import gift.annotation.ValidUser;
@@ -31,7 +31,7 @@ public class OrderController {
 
     @Operation(summary = "주문 조회", description = "주문 목록을 조회합니다")
     @ApiResponse(responseCode = "200", description = "조회 완료",
-            content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ResponseOrderDTO.class)))
+            content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ResponseOrderDto.class)))
     })
     @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인해주세요",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
@@ -40,14 +40,14 @@ public class OrderController {
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @GetMapping
-    public ResponseEntity<List<ResponseOrderDTO>> getOrders(@ValidUser Member member){
-        List<ResponseOrderDTO> orders = orderService.getOrders(member);
+    public ResponseEntity<List<ResponseOrderDto>> getOrders(@ValidUser Member member){
+        List<ResponseOrderDto> orders = orderService.getOrders(member);
         return ResponseEntity.ok(orders);
     }
 
     @Operation(summary = "주문 추가", description = "주문을 추가합니다")
     @ApiResponse(responseCode = "201", description = "추가 완료",
-            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseOrderDTO.class))
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseOrderDto.class))
             })
     @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인하거나 옵션이나 재고가 없습니다",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
@@ -59,8 +59,8 @@ public class OrderController {
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @PostMapping
-    public ResponseEntity<ResponseOrderDTO> createOrder(@ValidUser Member member, @Valid @RequestBody RequestOrderDTO requestOrderDTO){
-        ResponseOrderDTO response =orderService.createOrder(member, requestOrderDTO);
+    public ResponseEntity<ResponseOrderDto> createOrder(@ValidUser Member member, @Valid @RequestBody RequestOrderDto requestOrderDTO){
+        ResponseOrderDto response =orderService.createOrder(member, requestOrderDTO);
         return ResponseEntity.created(URI.create("api/orders/"+response.getId())).body(response);
     }
 

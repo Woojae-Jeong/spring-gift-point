@@ -3,7 +3,7 @@ package gift.category.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "카테고리 응답 DTO")
-public class ResponseCategoryDTO {
+public class ResponseCategoryDto {
     @Schema(description = "카테고리 Id")
     private Long id;
 
@@ -19,10 +19,10 @@ public class ResponseCategoryDTO {
     @Schema(description = "카테고리 설명")
     private String description;
 
-    public ResponseCategoryDTO() {
+    public ResponseCategoryDto() {
     }
 
-    public ResponseCategoryDTO(Long id, String name, String color, String imageUrl, String description) {
+    public ResponseCategoryDto(Long id, String name, String color, String imageUrl, String description) {
         this.id = id;
         this.name = name;
         this.color = color;

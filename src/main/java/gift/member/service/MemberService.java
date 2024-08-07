@@ -4,7 +4,7 @@ import gift.member.exception.EmailAlreadyExistsException;
 import gift.member.exception.ForbiddenException;
 import gift.member.exception.MemberNotFoundException;
 import gift.member.entity.Member;
-import gift.member.dto.RequestMemberDTO;
+import gift.member.dto.RequestMemberDto;
 import gift.vo.Email;
 import gift.member.repository.MemberRepository;
 import gift.util.JwtUtil;
@@ -27,7 +27,7 @@ public class MemberService {
     }
 
     @Transactional
-    public String signUpUser(RequestMemberDTO requestMemberDTO){
+    public String signUpUser(RequestMemberDto requestMemberDTO){
         Optional<Member> optionalMember = memberRepository.findByEmail(new Email(requestMemberDTO.email()));
         if(optionalMember.isPresent())
             throw new EmailAlreadyExistsException("이미 존재하는 이메일입니다");
@@ -36,7 +36,7 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public String loginUser(RequestMemberDTO requestMemberDTO) throws ForbiddenException {
+    public String loginUser(RequestMemberDto requestMemberDTO) throws ForbiddenException {
         Member member = memberRepository.findByEmail(new Email(requestMemberDTO.email())).orElseThrow(() -> new ForbiddenException("아이디가 존재하지 않습니다"));
         String temp = member.getPassword().getValue();
         if (!(temp.equals(requestMemberDTO.password())))
