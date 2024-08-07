@@ -1,7 +1,7 @@
 package gift.member.service;
 
 import gift.member.exception.EmailAlreadyExistsException;
-import gift.member.exception.ForbiddenException;
+import gift.member.exception.InvalidCredentialException;
 import gift.member.exception.MemberNotFoundException;
 import gift.member.entity.Member;
 import gift.member.dto.RequestMemberDto;
@@ -30,24 +30,24 @@ public class MemberService {
     public String signUpUser(RequestMemberDto requestMemberDTO){
         Optional<Member> optionalMember = memberRepository.findByEmail(new Email(requestMemberDTO.email()));
         if(optionalMember.isPresent())
-            throw new EmailAlreadyExistsException("이미 존재하는 이메일입니다");
+            throw new EmailAlreadyExistsException();
         Member member =  memberRepository.save(new Member(requestMemberDTO.email(), requestMemberDTO.password(), 0));
         return jwtUtil.generateToken(member);
     }
 
     @Transactional(readOnly = true)
-    public String loginUser(RequestMemberDto requestMemberDTO) throws ForbiddenException {
-        Member member = memberRepository.findByEmail(new Email(requestMemberDTO.email())).orElseThrow(() -> new ForbiddenException("아이디가 존재하지 않습니다"));
+    public String loginUser(RequestMemberDto requestMemberDTO) {
+        Member member = memberRepository.findByEmail(new Email(requestMemberDTO.email())).orElseThrow(() -> new InvalidCredentialException());
         String temp = member.getPassword().getValue();
         if (!(temp.equals(requestMemberDTO.password())))
-            throw new ForbiddenException("비밀번호가 틀렸습니다");
+            throw new InvalidCredentialException();
 
         return jwtUtil.generateToken(member);
     }
 
     @Transactional(readOnly = true)
     public Member getUserByToken(String token) {
-        return memberRepository.findByEmail(new Email(jwtUtil.getSubject(token))).orElseThrow(()-> new MemberNotFoundException("매칭되는 멤버가 없습니다"));
+        return memberRepository.findByEmail(new Email(jwtUtil.getSubject(token))).orElseThrow(()-> new MemberNotFoundException());
     }
 
     @Transactional
@@ -62,7 +62,7 @@ public class MemberService {
 
     @Transactional
     public void addPoints(Long memberId, int point) {
-        Member member = memberRepository.findById(memberId).orElseThrow(()-> new MemberNotFoundException("멤버가 존재하지 않습니다"));
+        Member member = memberRepository.findById(memberId).orElseThrow(()-> new MemberNotFoundException());
         member.addPoint(point);
     }
     @Transactional(readOnly = true)
@@ -78,7 +78,7 @@ public class MemberService {
 
     @Transactional(readOnly = true)
     public Member selectMember(Long id) {
-        return memberRepository.findById(id).orElseThrow(()-> new MemberNotFoundException("멤버를 찾을 수 없습니다"));
+        return memberRepository.findById(id).orElseThrow(()-> new MemberNotFoundException());
     }
 
     @Transactional
