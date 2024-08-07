@@ -41,14 +41,14 @@ public class CategoryService {
     @Transactional
     public void editCategory(RequestCategoryDto requestCategoryDTO) {
         Category category = categoryRepository.findByName(new Name(requestCategoryDTO.name()))
-                .orElseThrow(()-> new CategoryNotFoundException("매칭되는 카테고리가 없습니다"));
+                .orElseThrow(CategoryNotFoundException::new);
         category.update(requestCategoryDTO.name(), requestCategoryDTO.color(), requestCategoryDTO.imageUrl(), requestCategoryDTO.description());;
     }
 
     @Transactional
     public void deleteCategory(Long categoryId) {
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new CategoryNotFoundException("매칭되는 카테고리가 없습니다"));
+                .orElseThrow(CategoryNotFoundException::new);
         categoryRepository.deleteById(categoryId);
     }
 }

@@ -43,7 +43,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public Page<ResponseProductListOfCategoryDto> getAllProducts(Pageable pageable, Long categoryId) {
-        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException("매칭되는 category가 없습니다"));
+        Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFoundException::new);
         Page<Product> productPage = productRepository.findByCategory(category, pageable);
         List<ResponseProductListOfCategoryDto> response = productPage.getContent()
                 .stream()
@@ -66,7 +66,7 @@ public class ProductService {
     @Transactional
     public void addProduct(RequestProductPostDto requestProductPostDTO) {
         Category category = categoryRepository.findById(requestProductPostDTO.categoryId())
-                .orElseThrow(()-> new CategoryNotFoundException("매칭되는 카테고리가 없습니다"));
+                .orElseThrow(CategoryNotFoundException::new);
         Product product = new Product(requestProductPostDTO.name(), requestProductPostDTO.price(), requestProductPostDTO.imageUrl(), category);
         productRepository.save(product);
         optionRepository.save(new Option(requestProductPostDTO.optionName(), requestProductPostDTO.optionQuantity(), product));
@@ -82,7 +82,7 @@ public class ProductService {
     public void editProduct(long id, RequestProductDto requestProductDTO) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("매칭되는 product가 없습니다"));
         Category category = categoryRepository.findById(requestProductDTO.categoryId())
-                .orElseThrow(() -> new CategoryNotFoundException("매칭되는 카테고리가 없습니다"));
+                .orElseThrow(CategoryNotFoundException::new);
         product.update(requestProductDTO.name(), requestProductDTO.price(), requestProductDTO.imageUrl(), category);
     }
 
