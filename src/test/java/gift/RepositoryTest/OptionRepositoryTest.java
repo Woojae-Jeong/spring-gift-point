@@ -1,11 +1,11 @@
 package gift.RepositoryTest;
 
-import gift.Model.Entity.Category;
-import gift.Model.Entity.Option;
-import gift.Model.Entity.Product;
-import gift.Repository.CategoryRepository;
-import gift.Repository.OptionRepository;
-import gift.Repository.ProductRepository;
+import gift.category.entity.Category;
+import gift.option.entity.Option;
+import gift.product.entity.Product;
+import gift.category.repository.CategoryRepository;
+import gift.option.repository.OptionRepository;
+import gift.product.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

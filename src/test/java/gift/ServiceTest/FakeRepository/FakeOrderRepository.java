@@ -1,7 +1,7 @@
 package gift.ServiceTest.FakeRepository;
 
-import gift.Model.Entity.Member;
-import gift.Model.Entity.Order;
+import gift.member.entity.Member;
+import gift.order.entity.Order;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,7 +1,7 @@
 package gift.RepositoryTest;
 
-import gift.Model.Entity.Member;
-import gift.Repository.MemberRepository;
+import gift.member.entity.Member;
+import gift.member.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

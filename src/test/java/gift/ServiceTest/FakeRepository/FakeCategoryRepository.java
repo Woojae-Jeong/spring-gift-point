@@ -1,8 +1,8 @@
 package gift.ServiceTest.FakeRepository;
 
-import gift.Model.Entity.Category;
-import gift.Model.Value.Name;
-import gift.Repository.CategoryRepository;
+import gift.category.entity.Category;
+import gift.vo.Name;
+import gift.category.repository.CategoryRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

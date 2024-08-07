@@ -1,9 +1,16 @@
 package gift.RepositoryTest;
 
-import gift.Model.Entity.*;
-import gift.Model.Value.CashReceipt;
-import gift.Model.Value.Quantity;
-import gift.Repository.*;
+import gift.vo.CashReceipt;
+import gift.category.entity.Category;
+import gift.category.repository.CategoryRepository;
+import gift.member.entity.Member;
+import gift.member.repository.MemberRepository;
+import gift.option.entity.Option;
+import gift.option.repository.OptionRepository;
+import gift.order.entity.Order;
+import gift.order.repository.OrderRepository;
+import gift.product.entity.Product;
+import gift.product.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

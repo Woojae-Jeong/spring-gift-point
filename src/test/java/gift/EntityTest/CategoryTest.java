@@ -1,6 +1,6 @@
 package gift.EntityTest;
 
-import gift.Model.Entity.Category;
+import gift.category.entity.Category;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

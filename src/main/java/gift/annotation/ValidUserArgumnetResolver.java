@@ -1,7 +1,7 @@
 package gift.annotation;
 
-import gift.Model.Entity.Member;
-import gift.Service.MemberService;
+import gift.member.entity.Member;
+import gift.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package gift.EntityTest;
 
-import gift.Model.Entity.Member;
+import gift.member.entity.Member;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;

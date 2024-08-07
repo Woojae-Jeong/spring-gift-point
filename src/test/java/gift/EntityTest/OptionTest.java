@@ -1,8 +1,8 @@
 package gift.EntityTest;
 
-import gift.Model.Entity.Category;
-import gift.Model.Entity.Option;
-import gift.Model.Entity.Product;
+import gift.category.entity.Category;
+import gift.option.entity.Option;
+import gift.product.entity.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

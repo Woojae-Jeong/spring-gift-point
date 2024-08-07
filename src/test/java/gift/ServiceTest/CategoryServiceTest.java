@@ -1,10 +1,10 @@
 package gift.ServiceTest;
 
-import gift.DTO.RequestCategoryDTO;
-import gift.DTO.ResponseCategoryDTO;
-import gift.Exception.CategoryNotFoundException;
-import gift.Repository.CategoryRepository;
-import gift.Service.CategoryService;
+import gift.category.dto.RequestCategoryDTO;
+import gift.category.dto.ResponseCategoryDTO;
+import gift.category.exception.CategoryNotFoundException;
+import gift.category.repository.CategoryRepository;
+import gift.category.service.CategoryService;
 import gift.ServiceTest.FakeRepository.FakeCategoryRepository;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
 package gift.ServiceTest.FakeRepository;
 
-import gift.Model.Entity.Option;
-import gift.Model.Entity.Product;
+import gift.option.entity.Option;
+import gift.product.entity.Product;
 
 import java.util.*;
 

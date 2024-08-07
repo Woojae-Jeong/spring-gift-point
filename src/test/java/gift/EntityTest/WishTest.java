@@ -1,9 +1,9 @@
 package gift.EntityTest;
 
-import gift.Model.Entity.Category;
-import gift.Model.Entity.Member;
-import gift.Model.Entity.Product;
-import gift.Model.Entity.Wish;
+import gift.category.entity.Category;
+import gift.member.entity.Member;
+import gift.product.entity.Product;
+import gift.wish.entity.Wish;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

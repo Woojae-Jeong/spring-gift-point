@@ -1,10 +1,10 @@
 package gift.RepositoryTest;
 
-import gift.Exception.ProductNotFoundException;
-import gift.Model.Entity.Category;
-import gift.Model.Entity.Product;
-import gift.Repository.CategoryRepository;
-import gift.Repository.ProductRepository;
+import gift.product.exception.ProductNotFoundException;
+import gift.category.entity.Category;
+import gift.product.entity.Product;
+import gift.category.repository.CategoryRepository;
+import gift.product.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

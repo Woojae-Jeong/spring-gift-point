@@ -1,6 +1,6 @@
 package gift.ServiceTest.FakeRepository;
 
-import gift.Model.Entity.Member;
+import gift.member.entity.Member;
 
 import java.util.*;
 

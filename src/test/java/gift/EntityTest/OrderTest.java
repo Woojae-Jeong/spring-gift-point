@@ -1,7 +1,11 @@
 package gift.EntityTest;
 
-import gift.Model.Entity.*;
-import gift.Model.Value.Quantity;
+import gift.vo.Quantity;
+import gift.category.entity.Category;
+import gift.member.entity.Member;
+import gift.option.entity.Option;
+import gift.order.entity.Order;
+import gift.product.entity.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,8 @@
 package gift.RepositoryTest;
 
-import gift.Model.Entity.Category;
-import gift.Model.Value.Name;
-import gift.Repository.CategoryRepository;
+import gift.category.entity.Category;
+import gift.vo.Name;
+import gift.category.repository.CategoryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
