@@ -6,8 +6,8 @@ import gift.kakaoOauth.KakaoProperties;
 import gift.kakaoOauth.dto.Link;
 import gift.kakaoOauth.dto.SendToMeTemplate;
 import gift.kakaoOauth.exception.JsonRunTimeException;
-import gift.kakaoOauth.exception.KaKaoBadRequestException;
 import gift.kakaoOauth.exception.KaKaoServerErrorException;
+import gift.kakaoOauth.exception.KakaoMessageBadRequestException;
 import gift.vo.AccessToken;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
@@ -36,10 +36,10 @@ public class KakaoUtil {
                 .body(body)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
-                    throw new KaKaoBadRequestException("카카오 나에게 메세지 보내기 API : " + response.getStatusCode() + "에러 발생. ");
+                    throw new KakaoMessageBadRequestException();
                 })
                 .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
-                    throw new KaKaoServerErrorException("카카오 나에게 메세지 보내기 API : " + response.getStatusCode() + "에러 발생. ");
+                    throw new KaKaoServerErrorException();
                 })
                 .toEntity(String.class);
     }
@@ -54,7 +54,7 @@ public class KakaoUtil {
         try {
             body.add("template_object", objectMapper.writeValueAsString(templateObject));
         } catch (JsonProcessingException e){
-            throw new JsonRunTimeException("객체를 Json문자열로 변환 중 에러 발생");
+            throw new JsonRunTimeException();
         }
         return body;
     }

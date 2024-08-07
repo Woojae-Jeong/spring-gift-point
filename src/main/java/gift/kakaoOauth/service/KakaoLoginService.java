@@ -2,8 +2,9 @@ package gift.kakaoOauth.service;
 
 import gift.kakaoOauth.dto.ResponseKaKaoUserInfo;
 import gift.kakaoOauth.dto.ResponseKakaoTokenDto;
-import gift.kakaoOauth.exception.KaKaoBadRequestException;
 import gift.kakaoOauth.exception.KaKaoServerErrorException;
+import gift.kakaoOauth.exception.KakaoTokenBadRequestException;
+import gift.kakaoOauth.exception.KakaoUserInfoBadRequestException;
 import gift.member.entity.Member;
 import gift.vo.Email;
 import gift.vo.Password;
@@ -67,10 +68,10 @@ public class KakaoLoginService {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
-                    throw new KaKaoBadRequestException("카카오 정보 가져오기 API : " + response.getStatusCode() + "에러 발생. ");
+                    throw new KakaoUserInfoBadRequestException();
                 })
                 .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
-                    throw new KaKaoServerErrorException("카카오 정보 가져오기 API : " + response.getStatusCode() + "에러 발생. ");
+                    throw new KaKaoServerErrorException();
                 })
                 .toEntity(ResponseKaKaoUserInfo.class)
                 .getBody()
@@ -92,10 +93,10 @@ public class KakaoLoginService {
                 .body(body)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
-                    throw new KaKaoBadRequestException("카카오 토큰 가져오기 API : " + response.getStatusCode() + "에러 발생. ");
+                    throw new KakaoTokenBadRequestException();
                 })
                 .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
-                    throw new KaKaoServerErrorException("카카오 토큰 가져오기 API : " + response.getStatusCode() + "에러 발생. ");
+                    throw new KaKaoServerErrorException();
                 })
                 .toEntity(ResponseKakaoTokenDto.class)
                 .getBody()
