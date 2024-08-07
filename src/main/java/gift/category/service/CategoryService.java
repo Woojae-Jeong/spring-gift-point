@@ -41,14 +41,14 @@ public class CategoryService {
     @Transactional
     public void editCategory(RequestCategoryDto requestCategoryDTO) {
         Category category = categoryRepository.findByName(new Name(requestCategoryDTO.name()))
-                .orElseThrow(CategoryNotFoundException::new);
+                .orElseThrow(()->new CategoryNotFoundException());
         category.update(requestCategoryDTO.name(), requestCategoryDTO.color(), requestCategoryDTO.imageUrl(), requestCategoryDTO.description());;
     }
 
     @Transactional
     public void deleteCategory(Long categoryId) {
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(CategoryNotFoundException::new);
+                .orElseThrow(()-> new CategoryNotFoundException());
         categoryRepository.deleteById(categoryId);
     }
 }

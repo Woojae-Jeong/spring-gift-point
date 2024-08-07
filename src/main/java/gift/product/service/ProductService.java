@@ -66,7 +66,7 @@ public class ProductService {
     @Transactional
     public void addProduct(RequestProductPostDto requestProductPostDTO) {
         Category category = categoryRepository.findById(requestProductPostDTO.categoryId())
-                .orElseThrow(CategoryNotFoundException::new);
+                .orElseThrow(()-> new CategoryNotFoundException());
         Product product = new Product(requestProductPostDTO.name(), requestProductPostDTO.price(), requestProductPostDTO.imageUrl(), category);
         productRepository.save(product);
         optionRepository.save(new Option(requestProductPostDTO.optionName(), requestProductPostDTO.optionQuantity(), product));
@@ -82,7 +82,7 @@ public class ProductService {
     public void editProduct(long id, RequestProductDto requestProductDTO) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("매칭되는 product가 없습니다"));
         Category category = categoryRepository.findById(requestProductDTO.categoryId())
-                .orElseThrow(CategoryNotFoundException::new);
+                .orElseThrow(()-> new CategoryNotFoundException());
         product.update(requestProductDTO.name(), requestProductDTO.price(), requestProductDTO.imageUrl(), category);
     }
 
