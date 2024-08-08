@@ -27,5 +27,5 @@ public record RequestOrderDto(
             message = "현금 영수증 휴대폰 번호의 양식이 잘못되었습니다"
     )
     @Schema(description= "현금 영수증 신청 휴대폰 번호")
-    Optional<String> phoneNumber
+    String phoneNumber
 ) { }

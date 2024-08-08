@@ -65,8 +65,9 @@ public class OrderService {
         memberService.subtractPoint(member, totalPrice);
 
         CashReceipt cashReceipt = null;
-        if (requestOrderDTO.phoneNumber().isPresent())
-            cashReceipt = new CashReceipt(requestOrderDTO.phoneNumber().get());
+
+        if (Optional.ofNullable(requestOrderDTO.phoneNumber()).isPresent())
+            cashReceipt = new CashReceipt(requestOrderDTO.phoneNumber());
 
         Order order = orderRepository.save(
                 new Order(option, member, requestOrderDTO.quantity(), LocalDateTime.now(), requestOrderDTO.message(), cashReceipt)
