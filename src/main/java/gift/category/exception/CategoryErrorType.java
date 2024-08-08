@@ -4,7 +4,7 @@ import gift.exception.ErrorType;
 import org.springframework.http.HttpStatus;
 
 public enum CategoryErrorType implements ErrorType {
-    CATEGORY_NOT_FOUND_EXCEPTION("C404_001", HttpStatus.NOT_FOUND, "해당 카테고리를 찾을 수 없습니다.");
+    CATEGORY_NOT_FOUND_EXCEPTION("Category404_001", HttpStatus.NOT_FOUND, "해당 카테고리를 찾을 수 없습니다.");
 
     private final String errorCode;
     private final HttpStatus httpStatus;
