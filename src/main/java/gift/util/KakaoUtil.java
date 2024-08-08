@@ -7,7 +7,7 @@ import gift.kakaoOauth.dto.Link;
 import gift.kakaoOauth.dto.SendToMeTemplate;
 import gift.kakaoOauth.exception.JsonRunTimeException;
 import gift.kakaoOauth.exception.KaKaoServerErrorException;
-import gift.kakaoOauth.exception.KakaoMessageBadRequestException;
+import gift.kakaoOauth.exception.KakaoMessage4xxException;
 import gift.vo.AccessToken;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
@@ -36,7 +36,7 @@ public class KakaoUtil {
                 .body(body)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
-                    throw new KakaoMessageBadRequestException();
+                    throw new KakaoMessage4xxException();
                 })
                 .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
                     throw new KaKaoServerErrorException();
