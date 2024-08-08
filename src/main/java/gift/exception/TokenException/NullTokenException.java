@@ -1,7 +1,9 @@
 package gift.exception.TokenException;
 
-public class NullTokenException extends TokenException {
-    public NullTokenException(String message) {
-        super(message);
+import gift.exception.BusinessException;
+
+public class NullTokenException extends BusinessException {
+    public NullTokenException() {
+        super(TokenErrorType.NULL_TOKEN_EXCEPTION);
     }
 }

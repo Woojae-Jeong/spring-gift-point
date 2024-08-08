@@ -1,7 +1,9 @@
 package gift.exception.TokenException;
 
-public class InvalidTokenException extends TokenException {
-    public InvalidTokenException(String message) {
-        super(message);
+import gift.exception.BusinessException;
+
+public class InvalidTokenException extends BusinessException {
+    public InvalidTokenException() {
+        super(TokenErrorType.INVALID_TOKEN_EXCEPTION);
     }
 }

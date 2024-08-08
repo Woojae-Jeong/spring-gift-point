@@ -1,9 +1,9 @@
 package gift.util;
 
 import gift.exception.TokenException.InvalidTokenException;
+import gift.exception.TokenException.MissingBearerTokenException;
 import gift.exception.TokenException.TokenExpiredException;
 import gift.exception.TokenException.NullTokenException;
-import gift.exception.TokenException.NotValidTokenException;
 import gift.member.entity.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -46,10 +46,10 @@ public class JwtUtil {
 
     private Claims extractClaims(String token) {
         if (token == null) {
-            throw new NullTokenException("null토큰 입니다");
+            throw new NullTokenException();
         }
         if (!token.contains("Bearer ")) {
-            throw new NotValidTokenException("잘못된 토큰 입니다");
+            throw new MissingBearerTokenException();
         }
         String tokenValue = token.split(" ")[1];
 
@@ -60,9 +60,9 @@ public class JwtUtil {
                     .parseClaimsJws(tokenValue)
                     .getBody();
         } catch (ExpiredJwtException e) {
-            throw new TokenExpiredException("만료된 토큰 입니다");
+            throw new TokenExpiredException();
         } catch (SignatureException e) {
-            throw new InvalidTokenException("올바르지 않은 토큰 입니다");
+            throw new InvalidTokenException();
         }
     }
 }

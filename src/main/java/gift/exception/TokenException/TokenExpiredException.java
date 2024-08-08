@@ -1,7 +1,9 @@
 package gift.exception.TokenException;
 
-public class TokenExpiredException extends TokenException {
-    public TokenExpiredException(String message) {
-        super(message);
+import gift.exception.BusinessException;
+
+public class TokenExpiredException extends BusinessException {
+    public TokenExpiredException() {
+        super(TokenErrorType.TOKEN_EXPIRED_EXCEPTION);
     }
 }
