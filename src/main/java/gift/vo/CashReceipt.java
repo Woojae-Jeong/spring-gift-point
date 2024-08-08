@@ -13,7 +13,7 @@ public class CashReceipt {
 
     private String value;
 
-    private CashReceipt() {}
+    protected CashReceipt() {}
 
     public CashReceipt(String value) {
         validateValue(value);
