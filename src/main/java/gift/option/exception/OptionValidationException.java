@@ -3,7 +3,7 @@ package gift.option.exception;
 import gift.exception.BusinessException;
 
 public class OptionValidationException extends BusinessException {
-    public OptionValidationException(String message){
-        super(message);
+    public OptionValidationException(){
+        super(OptionErrorType.OPTION_VALIDATION_EXCEPTION);
     }
 }
