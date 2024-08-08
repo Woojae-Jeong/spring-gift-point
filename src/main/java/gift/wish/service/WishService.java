@@ -41,7 +41,10 @@ public class WishService {
     @Transactional(readOnly = true)
     public Page<ResponseWishDTO> getWishList(Member member, Pageable pageable) {
         Page<Wish> wishListPage= wishRepository.findByMember(member,pageable);
-        List<ResponseWishDTO> response = wishListPage.getContent().stream().map(ResponseWishDTO::of).toList();
+        List<ResponseWishDTO> response = wishListPage.getContent()
+                .stream()
+                .map(ResponseWishDTO::of)
+                .toList();
         Page<ResponseWishDTO> page = new PageImpl<>(response, pageable, wishListPage.getTotalElements());
         return page;
     }
