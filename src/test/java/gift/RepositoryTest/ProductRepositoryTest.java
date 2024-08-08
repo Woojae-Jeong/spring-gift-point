@@ -53,7 +53,7 @@ public class ProductRepositoryTest {
         Product product = optionalProduct.get();
         product.update("카푸치노", 5000, "카푸치노url", category);
 
-        Product actual = productRepository.findById(product.getId()).orElseThrow(() -> new ProductNotFoundException("매칭되는 product가 없습니다."));
+        Product actual = productRepository.findById(product.getId()).orElseThrow(() -> new ProductNotFoundException());
         assertAll(
                 () -> assertThat(actual.getName().getValue()).isEqualTo("카푸치노"),
                 () -> assertThat(actual.getPrice().getValue()).isEqualTo(5000),

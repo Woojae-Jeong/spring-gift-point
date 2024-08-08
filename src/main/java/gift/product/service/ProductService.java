@@ -55,7 +55,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ResponseProductDto getProduct(Long productId) {
-        Product product = productRepository.findById(productId).orElseThrow(()-> new ProductNotFoundException("매칭되는 product가 없습니다"));
+        Product product = productRepository.findById(productId).orElseThrow(()-> new ProductNotFoundException());
         List<ResponseOptionDto> options = optionRepository.findByProduct(product)
                 .stream()
                 .map(ResponseOptionDto:: of)
@@ -74,13 +74,13 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public Product selectProduct(long id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("매칭되는 product가 없습니다"));
+        Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException());
         return product;
     }
 
     @Transactional
     public void editProduct(long id, RequestProductDto requestProductDTO) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("매칭되는 product가 없습니다"));
+        Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException());
         Category category = categoryRepository.findById(requestProductDTO.categoryId())
                 .orElseThrow(()-> new CategoryNotFoundException());
         product.update(requestProductDTO.name(), requestProductDTO.price(), requestProductDTO.imageUrl(), category);
@@ -88,7 +88,7 @@ public class ProductService {
 
     @Transactional
     public void deleteProduct(long id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("매칭되는 product가 없습니다"));
+        Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException());
         optionRepository.deleteByProduct(product);
         productRepository.deleteById(product.getId());
     }
