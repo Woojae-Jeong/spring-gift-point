@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 public enum commonErrorType implements ErrorType{
     METHOD_ARGUMENT_NOT_VALID_EXCEPTION("Request400_001", HttpStatus.BAD_REQUEST, "요청값이 잘못됐습니다. API 명세서 양식에 맞춰주세요"),
     ILLEGAL_ARGUMENT_EXCEPTION("Request400_002", HttpStatus.BAD_REQUEST, "요청값이 잘못됐습니다. 요구사항에 맞게 작성해주세요."),
-    NO_SUCH_ARGUMENT_EXCEPTION("Request400_003", HttpStatus.NOT_FOUND, "요구하신 요청에 맞는 리소스를 찾을 수 없습니다.");
+    NO_SUCH_ARGUMENT_EXCEPTION("Request400_003", HttpStatus.NOT_FOUND, "요구하신 요청에 맞는 리소스를 찾을 수 없습니다."),
+    MISSING_PATH_VARIABLE_EXCEPTION("Request400_004", HttpStatus.BAD_REQUEST, "PathVariable이 누락됐습니다."),
+    MISSING_REQUEST_PARAM_EXCEPTION("Request400_005", HttpStatus.BAD_REQUEST, "RequestParameter가 누락됐습니다.");
 
     private String errorCode;
     private HttpStatus httpStatus;
