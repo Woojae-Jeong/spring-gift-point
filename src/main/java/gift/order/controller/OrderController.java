@@ -33,7 +33,13 @@ public class OrderController {
     @ApiResponse(responseCode = "200", description = "조회 완료",
             content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ResponseOrderDto.class)))
     })
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인해주세요",
+    @ApiResponse(responseCode = "400", description = "토큰이 잘못된 형식이거나 카카오 API 호출 중 400번대 에러가 발생했습니다.",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰입니다",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "404", description = "회원이 존재하지 않습니다.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",
@@ -49,10 +55,13 @@ public class OrderController {
     @ApiResponse(responseCode = "201", description = "추가 완료",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseOrderDto.class))
             })
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인하거나 옵션이나 재고가 없습니다",
+    @ApiResponse(responseCode = "400", description = "토큰이나 요청값이 잘못된 형식이거나 해당 옵션의 재고가 없습니다",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
-    @ApiResponse(responseCode = "403", description = "유효하지 않은 토큰입니다",
+    @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰입니다",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "404", description = "회원이 존재하지 않거나 옵션이 존재하지 않습니다.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",
@@ -68,7 +77,13 @@ public class OrderController {
     @ApiResponse(responseCode = "200", description = "삭제 완료",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인해주세요",
+    @ApiResponse(responseCode = "400", description = "토큰이나 요청값이 잘못된 형식입니다.",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰입니다",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "404", description = "회원이 존재하지 않거나 옵션이 존재하지 않습니다..",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",

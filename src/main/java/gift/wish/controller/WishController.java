@@ -35,10 +35,13 @@ public class WishController {
 
     @Operation(summary = "찜 추가", description = "찜을 추가합니다")
     @ApiResponse(responseCode = "201", description = "추가 완료")
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인하거나 상품이 존재하지 않습니다",
+    @ApiResponse(responseCode = "400", description = "토큰이 지원 형식을 만족하지 않거나 요청값이 잘못됐습니다.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
-    @ApiResponse(responseCode = "403", description = "유효하지 않은 토큰입니다",
+    @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰입니다",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "404", description = "찜이 존재하지 않거나 회원이 존재하지 않습니다.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",
@@ -54,10 +57,13 @@ public class WishController {
     @ApiResponse(responseCode = "200", description = "조회 완료",
             content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation =ResponseWishDTO.class)))
             })
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인해주세요",
+    @ApiResponse(responseCode = "400", description = "토큰이 지원 형식을 만족하지 않습니다",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
-    @ApiResponse(responseCode = "403", description = "유효하지 않은 토큰입니다",
+    @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰입니다",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "404", description = "회원이 존재하지 않습니다.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",
@@ -72,10 +78,13 @@ public class WishController {
 
     @Operation(summary = "찜 삭제", description = "찜을 삭제합니다")
     @ApiResponse(responseCode = "204", description = "삭제 완료")
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인하거나 상품이나 찜이 존재하지 않습니다",
+    @ApiResponse(responseCode = "400", description = "토큰이 지원 형식을 만족하지 않거나 요청값이 잘못됐습니다.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
-    @ApiResponse(responseCode = "403", description = "유효하지 않은 토큰입니다",
+    @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰입니다",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "404", description = "상품이나 찜이 존재하지 않습니다. 또는 회원이 존재하지 않습니다.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",

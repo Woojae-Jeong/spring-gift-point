@@ -42,10 +42,13 @@ public class KakaoOauthController {
     @ApiResponse(responseCode = "200", description = "발급 완료",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인해주세요",
+    @ApiResponse(responseCode = "400", description = "요청값이 올바르지 않거나 카카오 API 호출 중 400번대 에러가 발생했습니다.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "502", description = "카카오 서버를 현재 이용할 수 없습니다.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @GetMapping("/login")

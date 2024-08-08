@@ -35,7 +35,10 @@ public class ProductController {
     @ApiResponse(responseCode = "200", description = "조회 완료",
             content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ResponseProductListOfCategoryDto.class)))
             })
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인하거나 카테고리가 존재하지 않습니다",
+    @ApiResponse(responseCode = "400", description = "요청값이 올바르지 않습니다. 요청값을 확인해주세요",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "404", description = "카테고리가 존재하지 않습니다. 요청값을 다시 확인해주세요",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",
@@ -52,7 +55,10 @@ public class ProductController {
     @ApiResponse(responseCode = "200", description = "조회 완료",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseProductDto.class))
             })
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인하거나 상품 id가 존재하지 않는 id입니다",
+    @ApiResponse(responseCode = "400", description = "요청값이 올바르지 않습니다. 요청값을 확인해주세요",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "404", description = "상품이 존재하지 않습니다. 요청값을 다시 확인해주세요",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",

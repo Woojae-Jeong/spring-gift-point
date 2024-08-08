@@ -33,7 +33,7 @@ public class CategoryController {
     @ApiResponse(responseCode = "201", description = "추가 완료",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인해주세요.",
+    @ApiResponse(responseCode = "400", description = "요청값이 올바르지 않습니다. 요청값을 확인해주세요.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",
@@ -63,7 +63,10 @@ public class CategoryController {
     @ApiResponse(responseCode = "200", description = "수정 완료",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인해주세요",
+    @ApiResponse(responseCode = "400", description = "요청값이 올바르지 않습니다. 요청값을 확인해주세요",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "404", description = "카테고리가 존재하지 않습니다.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",
@@ -79,7 +82,10 @@ public class CategoryController {
     @ApiResponse(responseCode = "200", description = "삭제 완료",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
-    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다. 입력값을 확인해주세요",
+    @ApiResponse(responseCode = "400", description = "요청값이 올바르지 않습니다. 요청값을 확인해주세요",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            })
+    @ApiResponse(responseCode = "404", description = "카테고리가 존재하지 않습니다.",
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             })
     @ApiResponse(responseCode = "500", description = "서버 내부 에러 발생",
