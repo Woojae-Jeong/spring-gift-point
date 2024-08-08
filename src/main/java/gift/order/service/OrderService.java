@@ -51,7 +51,7 @@ public class OrderService {
     @Transactional
     public ResponseOrderDto createOrder(Member member, RequestOrderDto requestOrderDTO) {
         Option option = optionRepository.findById(requestOrderDTO.optionId()).orElseThrow(()->
-                new OptionNotFoundException("매칭되는 옵션이 없습니다"));
+                new OptionNotFoundException());
 
         optionService.subtractQuantity(option.getId(), requestOrderDTO.quantity());
 
@@ -99,7 +99,7 @@ public class OrderService {
     @Transactional
     public void deleteOrder(Member member, Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(
-                () -> new OrderNotFoundException("해당하는 주문을 찾을 수 없습니다"));
+                () -> new OrderNotFoundException());
         order.checkOrderBelongsToMember(member);
         order.getOption().addQuantity(order.getQuantity().getValue());
         int totalPrice = getToalPrice(order.getQuantity().getValue(), order.getOption().getProduct());
