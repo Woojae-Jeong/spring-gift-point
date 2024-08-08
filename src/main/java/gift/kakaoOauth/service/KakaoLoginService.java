@@ -3,8 +3,8 @@ package gift.kakaoOauth.service;
 import gift.kakaoOauth.dto.ResponseKaKaoUserInfo;
 import gift.kakaoOauth.dto.ResponseKakaoTokenDto;
 import gift.kakaoOauth.exception.KaKaoServerErrorException;
-import gift.kakaoOauth.exception.KakaoTokenBadRequestException;
-import gift.kakaoOauth.exception.KakaoUserInfoBadRequestException;
+import gift.kakaoOauth.exception.KakaoToken4xxException;
+import gift.kakaoOauth.exception.KakaoUserInfo4xxException;
 import gift.member.entity.Member;
 import gift.vo.Email;
 import gift.vo.Password;
@@ -68,7 +68,7 @@ public class KakaoLoginService {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
-                    throw new KakaoUserInfoBadRequestException();
+                    throw new KakaoUserInfo4xxException();
                 })
                 .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
                     throw new KaKaoServerErrorException();
@@ -93,7 +93,7 @@ public class KakaoLoginService {
                 .body(body)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
-                    throw new KakaoTokenBadRequestException();
+                    throw new KakaoToken4xxException();
                 })
                 .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
                     throw new KaKaoServerErrorException();
