@@ -33,7 +33,7 @@ public class WishService {
     @Transactional
     public Wish addWish(Member member, RequestWishDTO requestWishDTO) {
         Product product = productRepository.findById(requestWishDTO.getProductId())
-                .orElseThrow(()->new ProductNotFoundException("매칭되는 상품이 없습니다."));
+                .orElseThrow(()->new ProductNotFoundException());
         Wish wish = new Wish(member, product, LocalDateTime.now());
         return wishRepository.save(wish);
     }
@@ -49,9 +49,9 @@ public class WishService {
     @Transactional
     public void deleteWish(Member member, Long productId) {
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ProductNotFoundException("매칭되는 물건이 없습니다."));
+                .orElseThrow(() -> new ProductNotFoundException());
         Wish wish = wishRepository.findByMemberAndProduct(member, product)
-                .orElseThrow(() -> new WishNotFoundException("매칭되는 wish가 없습니다"));
+                .orElseThrow(() -> new WishNotFoundException());
         wishRepository.deleteById(wish.getId());
     }
 
